@@ -32,9 +32,12 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh 'echo "Java Unit and Mutation Tests"'
+                sh 'echo "Java Unit Tests"'
                 sh "mvn test"
                 archive 'target/*.jar'
+
+                sh 'echo "Java Mutation Tests"'
+                sh "mvn org.pitest:pitest-maven:mutationCoverage"
 
                 sh 'echo "Docker Unit Tests"'
 
@@ -44,7 +47,7 @@ pipeline {
                 always {
                     junit 'target/surefire-reports/*.xml'
                     jacoco execPattern: 'target/jacoco.exec'
-                    pitmutation mutationStatsFile: '**+target/pit-reports/**/mutations.xml'
+                    pitmutation mutationStatsFile: '**/target/pit-reports/**/mutations.xml'
                 }
             }
         }
