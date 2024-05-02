@@ -47,7 +47,7 @@ pipeline {
 
         stage('Audit') {
             steps {
-                sh 'echo "Audit'
+                sh 'echo "Audit"'
             }
         }
 
