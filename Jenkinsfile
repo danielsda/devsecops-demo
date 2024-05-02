@@ -20,9 +20,11 @@ pipeline {
                 sh 'mvn clean package -DskipTests=true'
                 archive 'target/*.jar'
 
-                sh 'echo "Docker Build"'
-                sh 'docker build -t danielsda/numeric-app:""$GIT_COMMIT"" .'
-                sh 'docker push danielsda/numeric-app:""$GIT_COMMIT""'
+                withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
+                    sh 'echo "Docker Build"'
+                    sh 'docker build -t danielsda/numeric-app:""$GIT_COMMIT"" .'
+                    sh 'docker push danielsda/numeric-app:""$GIT_COMMIT""'
+                }
 
                 sh 'echo "Helm Build"'
             }
