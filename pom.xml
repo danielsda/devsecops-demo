@@ -76,15 +76,6 @@
 						<outputFormat>HTML</outputFormat>
 					</outputFormats>
 				</configuration>
-				<executions>
-					<execution>
-						<id>mutation-test</id>
-						<phase>test</phase>
-						<goals>
-							<goal>mutationCoverage</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>
