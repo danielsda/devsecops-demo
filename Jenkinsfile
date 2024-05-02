@@ -4,8 +4,12 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh "mvn clean package -DskipTests=true"
+                sh 'echo "Java Build"'
+                sh 'mvn clean package -DskipTests=true'
                 archive 'target/*.jar'
+
+                sh 'echo "Docker Build"'
+                sh 'docker build -t numeric-app:""$GIT_COMMIT .'
             }
         }
 
