@@ -21,7 +21,8 @@ pipeline {
                 archive 'target/*.jar'
 
                 sh 'echo "Docker Build"'
-                sh 'docker build -t numeric-app:""$GIT_COMMIT .'
+                sh 'docker build -t numeric-app:""$GIT_COMMIT"" .'
+                sh 'docker push danielsda/numeric-app:""$GIT_COMMIT"" .'
 
                 sh 'echo "Helm Build"'
             }
@@ -72,7 +73,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh 'echo "Deploy Kubernetes"'
-                sh 'sed -i "s#replace#numeric-app:${GIT_COMMIT}#g" k8s_deployment_service.yaml'
+                sh 'sed -i "s#replace#danielsda/numeric-app:${GIT_COMMIT}#g" k8s_deployment_service.yaml'
                 sh 'kubectl apply -f k8s_deployment_service.yaml'
             }
         }
