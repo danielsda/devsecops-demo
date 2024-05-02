@@ -22,7 +22,7 @@ pipeline {
 
                 sh 'echo "Docker Build"'
                 sh 'docker build -t numeric-app:""$GIT_COMMIT"" .'
-                sh 'docker push danielsda/numeric-app:""$GIT_COMMIT"" .'
+                sh 'docker push danielsda/numeric-app:""$GIT_COMMIT""'
 
                 sh 'echo "Helm Build"'
             }
