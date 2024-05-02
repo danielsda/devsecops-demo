@@ -32,7 +32,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh 'echo "Java Unit Tests"'
+                sh 'echo "Java Unit and Mutation Tests"'
                 sh "mvn test"
                 archive 'target/*.jar'
 
@@ -44,6 +44,7 @@ pipeline {
                 always {
                     junit 'target/surefire-reports/*.xml'
                     jacoco execPattern: 'target/jacoco.exec'
+                    pitmutation mutationStatsFile: '**+target/pit-reports/**/mutations.xml'
                 }
             }
         }
