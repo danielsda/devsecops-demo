@@ -48,11 +48,14 @@ pipeline {
 
         stage('Audit') {
             steps {
-                sh 'echo "Dependency Check"'
-                sh 'mvn dependency-check:check'
-
-                sh 'echo "Trivy Scan"'
-                sh 'bash trivy-docker-image-scan.sh'
+                parallel (
+                    "Dependency Check": {
+                        sh 'mvn dependency-check:check'
+                    },
+                    "Trivy Scan": {‡
+                        // sh 'bash trivy-docker-image-scan.sh'
+                    }
+                )
             }
         }
 
