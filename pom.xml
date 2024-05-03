@@ -16,7 +16,12 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>11</java.version>
+		<sonar.coverage.jacoco.xmlReportPaths>${project.build.directory}/jacoco-ut/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+		<sonar.java.binaries>target</sonar.java.binaries>
+		<sonar.java.sources>17</sonar.java.sources>
+		<sonar.junit.reportPaths>${project.build.directory}/surefire-reports</sonar.junit.reportPaths>
+		<sonar.sources>src/main</sonar.sources>
+		<sonar.tests>src/test</sonar.tests>
 	</properties>
 	<dependencies>
 		<dependency>
