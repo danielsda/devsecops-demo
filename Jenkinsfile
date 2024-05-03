@@ -51,7 +51,13 @@ pipeline {
 
         stage('Audit') {
             steps {
-                sh 'echo "Audit"'
+                sh 'echo "Dependency Check"'
+                sh 'mvn dependency-check:check'
+                post {
+                    always {
+                        dependencyCheckPublisher patter: 'target/dependency-check-report.xml'
+                    }
+                }
             }
         }
 
