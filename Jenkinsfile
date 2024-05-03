@@ -30,7 +30,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'echo "Java Unit Tests"'
-                sh "mvn test"
+                sh "mvn verify"
                 archive 'target/*.jar'
 
                 sh 'echo "Java Mutation Tests"'
