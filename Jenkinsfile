@@ -53,10 +53,10 @@ pipeline {
             steps {
                 sh 'echo "Dependency Check"'
                 sh 'mvn dependency-check:check'
-                post {
-                    always {
-                        dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
-                    }
+            }
+            post {
+                always {
+                    dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
                 }
             }
         }
