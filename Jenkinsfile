@@ -40,24 +40,12 @@ pipeline {
 
                 sh 'echo "Helm Unit Tests"'
             }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                    jacoco execPattern: 'target/jacoco.exec'
-                    pitmutation mutationStatsFile: '**/target/pit-reports/**/mutations.xml'
-                }
-            }
         }
 
         stage('Audit') {
             steps {
                 sh 'echo "Dependency Check"'
                 sh 'mvn dependency-check:check'
-            }
-            post {
-                always {
-                    dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
-                }
             }
         }
 
@@ -93,6 +81,23 @@ pipeline {
                     sh 'kubectl apply -f k8s_deployment_service.yaml'
                 }
             }
+        }
+
+        post {
+            always {
+                junit 'target/surefire-reports/*.xml'
+                jacoco execPattern: 'target/jacoco.exec'
+                pitmutation mutationStatsFile: '**/target/pit-reports/**/mutations.xml'
+                dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
+            }
+
+//             success {
+//
+//             }
+//
+//             failure {
+//
+//             }
         }
     }
 }
