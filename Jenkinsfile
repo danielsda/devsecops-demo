@@ -5,11 +5,8 @@ pipeline {
         stage('Lint') {
             steps {
                 sh 'echo "lint_commit"'
-
                 sh 'echo "lint_dockerfile"'
-
                 sh 'echo "lint_dockerfile_trust"'
-
                 sh 'echo "lint_release"'
             }
         }
