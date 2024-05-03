@@ -60,13 +60,19 @@ pipeline {
 
         stage('Quality') {
             steps {
-                sh 'echo "Quality"'
+                sh 'echo "SonarQube Analysis"'
+                withSonarQubeEnv(sonarqube) {
+                    sh 'mvn sonar:sonar'
+                }
             }
         }
 
         stage('Quality-report') {
             steps {
-                sh 'echo "Quality"'
+                sh 'echo "Quality Gate"'
+                timeout(time: 5, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
+                }
             }
         }
 
