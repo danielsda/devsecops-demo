@@ -25,7 +25,7 @@ pipeline {
                         }
                     },
                     "Helm Build": {
-
+                        sh 'echo "Helm Build"'
                     }
                 )
             }
@@ -52,7 +52,8 @@ pipeline {
                     "Dependency Check": {
                         sh 'mvn dependency-check:check'
                     },
-                    "Trivy Scan": {‡
+                    "Trivy Scan": {
+                        sh 'echo "Trivy Scan"'
                         // sh 'bash trivy-docker-image-scan.sh'
                     }
                 )
