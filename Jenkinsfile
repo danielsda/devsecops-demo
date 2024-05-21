@@ -15,7 +15,7 @@ pipeline {
             steps {
                 sh 'echo "Java Build"'
                 sh 'mvn clean package -DskipTests=true'
-                archive 'target/*.jar'
+                archiveArtifacts 'target/*.jar'
 
                 sh 'echo "Docker Build"'
                 withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
