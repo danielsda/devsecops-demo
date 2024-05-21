@@ -31,7 +31,7 @@ pipeline {
             steps {
                 sh 'echo "Java Unit Tests"'
                 sh "mvn verify"
-                archive 'target/*.jar'
+                archiveArtifacts 'target/*.jar'
 
                 sh 'echo "Java Mutation Tests"'
                 sh "mvn org.pitest:pitest-maven:mutationCoverage"
@@ -68,7 +68,7 @@ pipeline {
         stage('Quality-report') {
             steps {
                 sh 'echo "Quality Gate"'
-                timeout(time: 5, unit: 'MINUTES') {
+                timeout(time: 3, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
                 }
             }
