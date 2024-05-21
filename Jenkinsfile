@@ -17,7 +17,7 @@ pipeline {
                 sh 'mvn clean package -DskipTests=true'
                 archive 'target/*.jar'
 
-                sh 'echo"Docker Build"'
+                sh 'echo "Docker Build"'
                 withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
                     sh 'docker build -t danielsda/numeric-app:""$GIT_COMMIT"" .'
                     sh 'docker push danielsda/numeric-app:""$GIT_COMMIT""'
